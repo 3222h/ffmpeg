@@ -1,3 +1,6 @@
+sudo apt update && sudo apt install -y pcmanfm lxterminal
+
+
 sudo apt update && sudo apt install -y ffmpeg
 
 mv videoplayback.mp4 input.mp4
