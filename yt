@@ -16,8 +16,8 @@ ffmpeg -y -i input.mp4 -ss 4 -i input.mp4 -filter_complex \
  color=c=${RAND_COLOR}:size=${NEW_WIDTH}x${NEW_HEIGHT}:d=0.1[flash]; \
  [0:v]scale=iw:ih[v2_raw]; \
  [1:v]crop=in_w/2:in_h/2:(in_w-out_w)/2+((in_w-out_w)/2)*sin(t*0.5):(in_h-out_h)/2+((in_h-out_h)/2)*sin(t*0.2),boxblur=1:1,scale=iw*2:ih*2[v1_raw]; \
- [v2_raw]format=rgba,geq=r='r(X,Y)':a='if(gte(min(X,iw-X,Y,ih-Y),10),255,0)',scale=iw:ih[v2]; \
- [v1_raw]format=rgba,geq=r='r(X,Y)':a='if(gte(min(X,iw-X,Y,ih-Y),10),255,0)',scale=iw:ih[v1]; \
+ [v2_raw]format=rgba,lutyuv='u=128:v=128',scale=iw:ih[v2]; \
+ [v1_raw]format=rgba,lutyuv='u=128:v=128',scale=iw:ih[v1]; \
  [bg][v2]overlay=10:10:format=auto[base]; \
  [base][v1]overlay=10:10:enable='gte(mod(t\,5)\,3)':format=auto[main]; \
  [main]lutrgb='r=negval:g=negval:b=negval':enable='between(mod(t\,30)\,0\,0.1)'[inv]; \
